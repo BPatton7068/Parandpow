@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chamonix Ski and Golf Guide | Par and Pow</title>
+  <meta name="description" content="Complete guide to skiing, snowboarding, and golf in Chamonix. Best time to visit, where to stay, resort details, and trip planning tips.">
+  <link rel="canonical" href="https://parandpow.com/destinations/chamonix">
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    .dest-hero{position:relative;height:70vh;min-height:500px;display:flex;align-items:flex-end;overflow:hidden;}
+    .dest-hero-img{position:absolute;inset:0;background:linear-gradient(135deg,#1a3d2b,#0a1628);}
+    .dest-hero-img img{width:100%;height:100%;object-fit:cover;}
+    .dest-hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.8) 0%,rgba(0,0,0,0.2) 60%,transparent 100%);}
+    .dest-hero-content{position:relative;z-index:2;padding:48px 40px;width:100%;max-width:1200px;margin:0 auto;}
+    .dest-hero-tag{font-size:11px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:12px;display:block;}
+    .dest-hero h1{font-family:var(--font-display);font-size:clamp(40px,7vw,80px);letter-spacing:2px;color:white;line-height:1;margin-bottom:8px;}
+    .dest-hero-loc{font-size:16px;color:rgba(255,255,255,0.7);margin:0;}
+    .dest-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:2px;background:#e2ddd5;margin-bottom:0;}
+    .dest-stat{background:var(--black);padding:20px;text-align:center;}
+    .dest-stat-num{font-family:var(--font-display);font-size:28px;letter-spacing:1px;color:var(--gold);line-height:1;}
+    .dest-stat-label{font-size:11px;color:rgba(255,255,255,0.5);letter-spacing:0.1em;text-transform:uppercase;margin-top:4px;}
+    .dest-body{max-width:800px;margin:0 auto;padding:64px 24px;}
+    .dest-body h2{font-family:var(--font-display);font-size:36px;letter-spacing:2px;margin:52px 0 16px;color:var(--black);}
+    .dest-body p{font-size:16px;line-height:1.85;color:#333;margin-bottom:18px;}
+    .dest-body ul{margin:0 0 20px 20px;}
+    .dest-body li{font-size:15px;line-height:1.8;color:#333;margin-bottom:6px;}
+    .info-box{background:var(--green);color:white;padding:28px 32px;border-radius:var(--radius-lg);margin:32px 0;}
+    .info-box h3{color:var(--gold-light);margin:0 0 16px;font-size:16px;letter-spacing:0.05em;}
+    .info-box p{color:rgba(255,255,255,0.85);font-size:14px;margin:0 0 8px;}
+    .info-box p:last-child{margin:0;}
+    .two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:24px 0;}
+    .link-card{background:var(--cream);border-radius:var(--radius-lg);padding:20px;}
+    .link-card h4{font-size:12px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:var(--gray);margin:0 0 8px;}
+    .link-card a{font-size:15px;font-weight:500;color:var(--green);}
+    .link-card a:hover{color:var(--gold);}
+    .tip-list{list-style:none;margin:0;padding:0;}
+    .tip-list li{padding:10px 0;border-bottom:1px solid var(--border);font-size:15px;color:#333;display:flex;gap:10px;}
+    .tip-list li:last-child{border-bottom:none;}
+    .tip-list li::before{content:"→";color:var(--gold);font-weight:600;flex-shrink:0;}
+    .back-link{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:500;color:var(--green);margin-bottom:48px;}
+    .back-link:hover{color:var(--gold);}
+    @media(max-width:600px){.two-col{grid-template-columns:1fr;}.dest-hero-content{padding:32px 20px;}}
+  </style>
+</head>
+<body>
+<nav class="nav">
+  <a href="/" class="nav-logo">PAR <span>&</span> POW</a>
+  <div class="nav-links">
+    <a href="/pages/destinations.html">Destinations</a>
+    <a href="/pages/gear-reviews.html">Gear</a>
+    <a href="/pages/travel-guides.html">Guides</a>
+    <a href="/pages/about.html">About</a>
+    <a href="/pages/merch.html" class="nav-cta">Shop</a>
+  </div>
+  <button class="nav-hamburger">&#9776;</button>
+</nav>
+<div class="mobile-nav"><button class="mobile-nav-close">&#215;</button><a href="/pages/destinations.html">Destinations</a><a href="/pages/gear-reviews.html">Gear</a><a href="/pages/travel-guides.html">Guides</a><a href="/pages/about.html">About</a><a href="/pages/merch.html">Shop</a></div>
+
+<div class="dest-hero">
+  <div class="dest-hero-img" id="heroImg">
+    <div id="heroPlaceholder" style="width:100%;height:100%;background:linear-gradient(135deg,#1a3d2b,#0a1628);"></div>
+  </div>
+  <div class="dest-hero-overlay"></div>
+  <div class="dest-hero-content">
+    <span class="dest-hero-tag">Europe &bull; Ski + Golf</span>
+    <h1>CHAMONIX</h1>
+    <p class="dest-hero-loc">Haute-Savoie, France</p>
+  </div>
+</div>
+
+<div class="dest-stats">
+  <div class="dest-stat"><div class="dest-stat-num">N/A</div><div class="dest-stat-label">Skiable Acres</div></div>
+  <div class="dest-stat"><div class="dest-stat-num">9,200 ft</div><div class="dest-stat-label">Vertical Drop</div></div>
+  <div class="dest-stat"><div class="dest-stat-num">300 inches</div><div class="dest-stat-label">Annual Snowfall</div></div>
+  <div class="dest-stat"><div class="dest-stat-num">150km</div><div class="dest-stat-label">Trails</div></div>
+</div>
+
+<div class="dest-body">
+  <a href="/pages/destinations.html" class="back-link">&larr; All Destinations</a>
+
+  <p style="font-size:18px;line-height:1.8;color:#333;font-weight:300;">Chamonix is the spiritual home of alpinism and extreme skiing. The Vallée Blanche — a 20km off-piste descent from the Aiguille du Midi — is one of the great ski experiences in the world. Golf Club Chamonix sits in the valley with views of Mont Blanc, Europe's highest peak. This is the trip for serious riders who want the most dramatic mountain setting in the Alps.</p>
+
+  <h2>THE SKIING</h2>
+  <div class="two-col">
+    <div class="link-card">
+      <h4>Ski Resort</h4>
+      <a href="https://www.chamonix.com" target="_blank" rel="nofollow">Chamonix Mont-Blanc &#8599;</a>
+    </div>
+    <div class="link-card">
+      <h4>Snow Season</h4>
+      <a href="https://www.chamonix.com" target="_blank" rel="nofollow">December – April</a>
+    </div>
+  </div>
+
+  <h2>THE GOLF</h2>
+  <div class="two-col">
+    <div class="link-card">
+      <h4>Golf Course</h4>
+      <a href="https://www.golf-chamonix.com" target="_blank" rel="nofollow">Golf Club Chamonix &#8599;</a>
+    </div>
+    <div class="link-card">
+      <h4>Golf Season</h4>
+      <p style="font-size:15px;font-weight:500;color:var(--green);margin:0;">May – October</p>
+    </div>
+  </div>
+
+  <h2>TRIP PLANNING</h2>
+  <div class="info-box">
+    <h3>Fast Facts</h3>
+    <p><strong style="color:white;">Where to stay:</strong> Hameau Albert 1er, Grand Hotel des Alpes, or Hotel Mont-Blanc</p>
+    <p><strong style="color:white;">Getting there:</strong> Geneva (GVA) — 1 hour drive through the Mont Blanc tunnel approach</p>
+    <p><strong style="color:white;">Budget:</strong> EUR 3,000–8,000 per person for 5 days</p>
+  </div>
+
+  <h2>INSIDER TIPS</h2>
+  <ul class="tip-list">
+    <li>The Vallée Blanche requires a guide for first-timers — worth every euro</li><li>Aiguille du Midi cable car is the most dramatic lift in the world</li><li>Chamonix town is genuinely French — none of the resort artificiality</li><li>Les Grands Montets is the best terrain for advanced freeriders</li>
+  </ul>
+
+  <h2>BOOK YOUR TRIP</h2>
+  <div class="two-col">
+    <a href="https://www.booking.com/searchresults.html?ss=Chamonix&aid=parandpow" target="_blank" rel="nofollow sponsored" class="btn btn-dark" style="justify-content:center;">Book Hotels &rarr;</a>
+    <a href="https://www.chamonix.com" target="_blank" rel="nofollow" class="btn btn-outline" style="justify-content:center;">Resort Website &rarr;</a>
+  </div>
+</div>
+
+<section class="email-section section--green">
+  <div class="container">
+    <h2 style="color:white">GET THE WEEKLY DROP</h2>
+    <p>More destination guides like this — once a week.</p>
+    <a href="https://par-pow.kit.com/f86beda3b8" target="_blank" class="btn btn-primary" style="font-size:15px;padding:14px 32px">Subscribe - It's Free</a>
+    <p class="email-note" style="margin-top:12px">No spam. One email a week. Unsubscribe anytime.</p>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><span class="nav-logo">PAR <span>&</span> POW</span><p>The guide for people who ski in the morning and make their tee time in the afternoon.</p></div>
+      <div class="footer-col"><h4>Explore</h4><ul><li><a href="/pages/destinations.html">All Destinations</a></li><li><a href="/pages/travel-guides.html">Travel Guides</a></li><li><a href="/pages/gear-reviews.html">Gear Reviews</a></li></ul></div>
+      <div class="footer-col"><h4>Connect</h4><ul><li><a href="https://instagram.com/parandpow" target="_blank">Instagram</a></li><li><a href="mailto:hello@parandpow.com">Contact</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 Par &amp; Pow. All rights reserved.</p></div>
+  </div>
+</footer>
+
+<script src="/js/main.js"></script>
+<script>
+// Load real photo from Google Places API
+var placeId = "ChIJSZNljSf_iUcRuHSoSoLBMhk";
+if(placeId) {
+  var script = document.createElement("script");
+  script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyDgPBlsL7oPaSRSHflHPjHj1mQAVx4q4gY&libraries=places&callback=initPlacePhoto";
+  document.head.appendChild(script);
+}
+
+function initPlacePhoto() {
+  var service = new google.maps.places.PlacesService(document.createElement("div"));
+  service.getDetails({
+    placeId: placeId,
+    fields: ["photos"]
+  }, function(place, status) {
+    if(status === google.maps.places.PlacesServiceStatus.OK && place.photos && place.photos.length > 0) {
+      var photoUrl = place.photos[0].getUrl({maxWidth: 1600, maxHeight: 900});
+      var img = document.createElement("img");
+      img.src = photoUrl;
+      img.alt = "Chamonix";
+      img.style.cssText = "width:100%;height:100%;object-fit:cover;";
+      document.getElementById("heroPlaceholder").replaceWith(img);
+    }
+  });
+}
+</script>
+</body>
+</html>
