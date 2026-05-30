@@ -182,8 +182,10 @@ const destinations = [
 ];
 
 function buildCard(d) {
+  const colors = ['#1a3d2b','#0a1628','#1a2840','#2d4a1e','#1a3d3d','#2b1a3d','#3d2b1a','#1a1a3d'];
+  const bg = colors[Math.abs(d.name.charCodeAt(0) + d.name.charCodeAt(1)) % colors.length];
   return `<div class="dest-full-card" data-region="${d.region}" data-name="${d.name.toLowerCase()}" data-location="${d.location.toLowerCase()}">
-    <div class="dest-full-card-img" style="background:linear-gradient(135deg,var(--green),#0a1628)">
+    <div class="dest-full-card-img" style="background:linear-gradient(135deg,${bg},#0a0a0a)">
       <span class="dest-full-card-region">${d.location.split(',').slice(-1)[0].trim()}</span>
     </div>
     <div class="dest-full-card-body">
