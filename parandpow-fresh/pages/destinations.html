@@ -8,11 +8,25 @@
   <link rel="canonical" href="https://parandpow.com/destinations">
   <link rel="stylesheet" href="/css/style.css">
   <style>
-    .search-bar { width: 100%; padding: 14px 18px; border: 1.5px solid var(--border); border-radius: var(--radius-lg); font-family: var(--font-body); font-size: 15px; color: var(--black); background: var(--white); outline: none; margin-bottom: 20px; }
-    .search-bar:focus { border-color: var(--green); }
-    .dest-count { font-size: 13px; color: var(--gray); margin-bottom: 28px; }
-    .dest-count strong { color: var(--black); font-weight: 500; }
-    .no-results { text-align: center; padding: 60px 20px; color: var(--gray); font-size: 15px; display: none; }
+    .search-bar{width:100%;padding:14px 18px;border:1.5px solid var(--border);border-radius:var(--radius-lg);font-family:var(--font-body);font-size:15px;color:var(--black);background:var(--white);outline:none;margin-bottom:20px;box-sizing:border-box;}
+    .search-bar:focus{border-color:var(--green);}
+    .dest-count{font-size:13px;color:var(--gray);margin-bottom:28px;}
+    .dest-count strong{color:var(--black);font-weight:500;}
+    .no-results{text-align:center;padding:60px 20px;color:var(--gray);font-size:15px;}
+    .d-card{border-radius:8px;overflow:hidden;border:1px solid var(--border);background:var(--white);margin-bottom:0;}
+    .d-card:hover{box-shadow:0 8px 40px rgba(0,0,0,0.15);transform:translateY(-3px);}
+    .d-img{height:140px;position:relative;}
+    .d-region{position:absolute;top:10px;right:10px;background:rgba(0,0,0,0.65);color:white;font-size:10px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;padding:3px 8px;border-radius:2px;}
+    .d-body{padding:16px;}
+    .d-name{font-size:16px;font-weight:500;margin:0 0 2px;}
+    .d-loc{font-size:12px;color:var(--gray);margin:0 0 12px;}
+    .d-links{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;}
+    .d-link{background:#f5f2ec;border-radius:4px;padding:8px 10px;}
+    .d-label{font-size:9px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:#6b6b6b;margin-bottom:3px;}
+    .d-link a{font-size:11px;font-weight:500;color:#1a3d2b;text-decoration:none;}
+    .d-link a:hover{color:#c9a84c;}
+    .d-tags{display:flex;flex-wrap:wrap;gap:4px;}
+    .d-tag{font-size:10px;background:rgba(29,110,79,0.08);color:#1a3d2b;padding:2px 7px;border-radius:2px;}
   </style>
 </head>
 <body>
@@ -51,10 +65,9 @@
       <button class="filter-btn" data-filter="southern">Southern Hemi</button>
       <button class="filter-btn" data-filter="other">Other</button>
     </div>
-    <p class="dest-count" id="destCount"><strong>108</strong> destinations</p>
-
+    <p class="dest-count" id="destCount"><strong>97</strong> destinations</p>
     <div class="dest-full-grid" id="destGrid"></div>
-    <div class="no-results" id="noResults">No destinations found. Try a different search.</div>
+    <div class="no-results" id="noResults" style="display:none">No destinations found. Try a different search.</div>
   </div>
 </section>
 
@@ -75,158 +88,142 @@
       <div class="footer-col"><h4>Sports</h4><ul><li><a href="/pages/destinations.html">Golf Adventures</a></li><li><a href="/pages/destinations.html">Ski / Snowboard</a></li><li><a href="/pages/merch.html">Merch Store</a></li></ul></div>
       <div class="footer-col"><h4>Connect</h4><ul><li><a href="https://instagram.com/parandpow" target="_blank">Instagram</a></li><li><a href="https://youtube.com/@parandpow" target="_blank">YouTube</a></li><li><a href="mailto:hello@parandpow.com">Contact</a></li></ul></div>
     </div>
-    <div class="footer-bottom"><p>&copy; 2026 Par & Pow. All rights reserved.</p><div class="footer-bottom-links"><a href="/pages/privacy.html">Privacy</a><a href="/pages/terms.html">Terms</a></div></div>
+    <div class="footer-bottom"><p>&copy; 2026 Par &amp; Pow. All rights reserved.</p><div class="footer-bottom-links"><a href="/pages/privacy.html">Privacy</a><a href="/pages/terms.html">Terms</a></div></div>
   </div>
 </footer>
-
 <script src="/js/main.js"></script>
 <script>
-const destinations = [
-  {name:"Whistler Blackcomb",location:"British Columbia, Canada",region:"canada",resort:"Whistler Blackcomb",resortUrl:"https://www.whistlerblackcomb.com",golf:"Nicklaus North Golf Course",golfUrl:"https://www.nicklasnorth.com",stats:["8,171 acres","200+ trails","469\" snowfall"]},
-  {name:"Lake Tahoe",location:"California / Nevada, USA",region:"west-usa",resort:"Palisades Tahoe",resortUrl:"https://www.palisadestahoe.com",golf:"Edgewood Tahoe",golfUrl:"https://www.edgewoodtahoe.com",stats:["6,000+ acres","Year-round","Lakeside golf"]},
-  {name:"Park City",location:"Utah, USA",region:"rockies",resort:"Park City Mountain",resortUrl:"https://www.parkcitymountain.com",golf:"Park City Golf Club",golfUrl:"https://www.parkcity.org/departments/golf-course",stats:["7,300+ acres","348 trails","Historic town"]},
-  {name:"Aspen Snowmass",location:"Colorado, USA",region:"rockies",resort:"Aspen Snowmass",resortUrl:"https://www.aspensnowmass.com",golf:"Aspen Golf Club",golfUrl:"https://www.aspengolfclub.com",stats:["5,527 acres","4 mountains","Luxury"]},
-  {name:"Vail",location:"Colorado, USA",region:"rockies",resort:"Vail Mountain",resortUrl:"https://www.vail.com",golf:"Vail Golf Club",golfUrl:"https://www.vailgolfclub.com",stats:["5,317 acres","Back bowls","European village"]},
-  {name:"Breckenridge",location:"Colorado, USA",region:"rockies",resort:"Breckenridge Ski Resort",resortUrl:"https://www.breckenridge.com",golf:"Breckenridge Golf Club",golfUrl:"https://www.breckenridgegolfclub.com",stats:["2,908 acres","5 peaks","Highest golf in NA"]},
-  {name:"Jackson Hole",location:"Wyoming, USA",region:"rockies",resort:"Jackson Hole Mountain",resortUrl:"https://www.jacksonhole.com",golf:"Jackson Hole Golf & Tennis",golfUrl:"https://www.jhgtc.com",stats:["2,500 acres","4,139 ft vertical","Expert terrain"]},
-  {name:"Mammoth Mountain",location:"California, USA",region:"west-usa",resort:"Mammoth Mountain",resortUrl:"https://www.mammothmountain.com",golf:"Sierra Star Golf Course",golfUrl:"https://www.sierrastargolf.com",stats:["3,500 acres","Longest CA season","400\" snowfall"]},
-  {name:"Big Sky",location:"Montana, USA",region:"rockies",resort:"Big Sky Resort",resortUrl:"https://www.bigskyresort.com",golf:"Big Sky Golf Course",golfUrl:"https://www.bigskyresort.com/golf",stats:["5,850 acres","Lone Peak","No crowds"]},
-  {name:"Steamboat Springs",location:"Colorado, USA",region:"rockies",resort:"Steamboat Ski Resort",resortUrl:"https://www.steamboat.com",golf:"Rollingstone Ranch Golf Club",golfUrl:"https://www.rollingstoneranch.com",stats:["2,965 acres","Champagne powder","Western charm"]},
-  {name:"Telluride",location:"Colorado, USA",region:"rockies",resort:"Telluride Ski Resort",resortUrl:"https://www.telluride.com",golf:"Telluride Golf Club",golfUrl:"https://www.telluride.com/golf",stats:["2,000 acres","Box canyon setting","Most beautiful in CO"]},
-  {name:"Snowbird",location:"Utah, USA",region:"rockies",resort:"Snowbird",resortUrl:"https://www.snowbird.com",golf:"Willow Creek Country Club",golfUrl:"https://www.willowcreekcc.com",stats:["2,500 acres","500\" snowfall","Expert terrain"]},
-  {name:"Alta",location:"Utah, USA",region:"rockies",resort:"Alta Ski Area",resortUrl:"https://www.alta.com",golf:"Mountain Dell Golf Course",golfUrl:"https://www.slco.org/mountain-dell",stats:["2,614 acres","Skiers only","Legendary powder"]},
-  {name:"Deer Valley",location:"Utah, USA",region:"rockies",resort:"Deer Valley Resort",resortUrl:"https://www.deervalley.com",golf:"Deer Valley Club",golfUrl:"https://www.deervalleyclub.com",stats:["2,026 acres","Ski-in/ski-out","Ultra-luxury"]},
-  {name:"Crested Butte",location:"Colorado, USA",region:"rockies",resort:"Crested Butte Mountain",resortUrl:"https://www.skicb.com",golf:"Club at Crested Butte",golfUrl:"https://www.cbclub.com",stats:["1,547 acres","Extreme terrain","Unspoiled town"]},
-  {name:"Taos Ski Valley",location:"New Mexico, USA",region:"rockies",resort:"Taos Ski Valley",resortUrl:"https://www.skitaos.com",golf:"Taos Country Club",golfUrl:"https://www.taoscountryclub.com",stats:["1,294 acres","51% expert","Unique culture"]},
-  {name:"Sun Valley",location:"Idaho, USA",region:"rockies",resort:"Sun Valley Resort",resortUrl:"https://www.sunvalley.com",golf:"Sun Valley Resort Golf Course",golfUrl:"https://www.sunvalley.com/golf",stats:["2,054 acres","America's first chairlift","Celebrity hideout"]},
-  {name:"Mt. Bachelor",location:"Oregon, USA",region:"west-usa",resort:"Mt. Bachelor",resortUrl:"https://www.mtbachelor.com",golf:"Widgi Creek Golf Club",golfUrl:"https://www.widgicreek.com",stats:["4,318 acres","Volcanic terrain","Long season"]},
-  {name:"Mt. Hood Meadows",location:"Oregon, USA",region:"west-usa",resort:"Mt. Hood Meadows",resortUrl:"https://www.skihood.com",golf:"Colwood Golf Center",golfUrl:"https://www.colwoodgolf.com",stats:["2,150 acres","Year-round skiing","Near Portland"]},
-  {name:"Crystal Mountain",location:"Washington, USA",region:"west-usa",resort:"Crystal Mountain",resortUrl:"https://www.crystalmountainresort.com",golf:"Washington National Golf Club",golfUrl:"https://www.washingtonnational.com",stats:["2,600 acres","Highest lift in WA","Rainier views"]},
-  {name:"Banff & Lake Louise",location:"Alberta, Canada",region:"canada",resort:"Lake Louise Ski Resort",resortUrl:"https://www.skilouise.com",golf:"Banff Springs Golf Course",golfUrl:"https://www.fairmont.com/banff-springs/golf",stats:["4,200 acres","UNESCO Heritage","Wildlife viewing"]},
-  {name:"Revelstoke",location:"British Columbia, Canada",region:"canada",resort:"Revelstoke Mountain Resort",resortUrl:"https://www.revelstokemountainresort.com",golf:"Revelstoke Golf Club",golfUrl:"https://www.revelstokegolfclub.com",stats:["3,121 acres","Greatest vertical in NA","Cat skiing"]},
-  {name:"Sun Peaks",location:"British Columbia, Canada",region:"canada",resort:"Sun Peaks Resort",resortUrl:"https://www.sunpeaksresort.com",golf:"Sun Peaks Golf",golfUrl:"https://www.sunpeaksresort.com/golf",stats:["4,270 acres","2nd largest in BC","Car-free village"]},
-  {name:"Fernie Alpine Resort",location:"British Columbia, Canada",region:"canada",resort:"Fernie Alpine Resort",resortUrl:"https://www.skifernie.com",golf:"Fernie Golf Club",golfUrl:"https://www.ferniegolfclub.com",stats:["2,504 acres","Bowl skiing","Powder destination"]},
-  {name:"Kicking Horse",location:"British Columbia, Canada",region:"canada",resort:"Kicking Horse Mountain",resortUrl:"https://www.kickinghorseresort.com",golf:"Golden Golf Club",golfUrl:"https://www.goldengolfclub.com",stats:["2,825 acres","4,133 ft vertical","World-class terrain"]},
-  {name:"Zermatt",location:"Valais, Switzerland",region:"europe",resort:"Zermatt Ski Resort",resortUrl:"https://www.zermatt.ch",golf:"Matterhorn Golf Club",golfUrl:"https://www.matterhornclub.ch",stats:["360km of pistes","Matterhorn views","Year-round skiing"]},
-  {name:"Chamonix",location:"Haute-Savoie, France",region:"europe",resort:"Chamonix Mont-Blanc",resortUrl:"https://www.chamonix.com",golf:"Golf Club Chamonix",golfUrl:"https://www.golf-chamonix.com",stats:["150km of pistes","Mont Blanc","Off-piste paradise"]},
-  {name:"St. Moritz",location:"Graubünden, Switzerland",region:"europe",resort:"St. Moritz Ski Resort",resortUrl:"https://www.stmoritz.com",golf:"Engadin Golf Club",golfUrl:"https://www.engadin-golf.ch",stats:["350km of pistes","Swiss luxury","Glamorous scene"]},
-  {name:"Verbier",location:"Valais, Switzerland",region:"europe",resort:"Verbier 4 Vallées",resortUrl:"https://www.verbier.ch",golf:"Golf Club de Verbier",golfUrl:"https://www.golfclubverbier.ch",stats:["410km of pistes","Expert terrain","Legendary après"]},
-  {name:"Courchevel",location:"Savoie, France",region:"europe",resort:"Courchevel Ski Resort",resortUrl:"https://www.courchevel.com",golf:"Golf Club Courchevel",golfUrl:"https://www.golfcourchevel.com",stats:["600km Les Trois Vallées","Ultra-luxury","Best grooming in Alps"]},
-  {name:"Méribel",location:"Savoie, France",region:"europe",resort:"Méribel Ski Resort",resortUrl:"https://www.meribel.net",golf:"Golf Club Méribel",golfUrl:"https://www.golf-meribel.com",stats:["600km Les Trois Vallées","Central location","British favourite"]},
-  {name:"Val d'Isère",location:"Savoie, France",region:"europe",resort:"Val d'Isère — Tignes",resortUrl:"https://www.valdisere.com",golf:"Golf Club de Tignes",golfUrl:"https://www.golftgv.com",stats:["300km of pistes","World Cup venue","Reliable snow"]},
-  {name:"Cortina d'Ampezzo",location:"Veneto, Italy",region:"europe",resort:"Cortina d'Ampezzo Ski",resortUrl:"https://www.dolomiti.org",golf:"Golf Club Cortina",golfUrl:"https://www.golfcortina.it",stats:["Dolomiti Superski","Pink Dolomites","Italian style"]},
-  {name:"Madonna di Campiglio",location:"Trentino, Italy",region:"europe",resort:"Ski Area Campiglio",resortUrl:"https://www.campiglio.it",golf:"Golf Club Madonna di Campiglio",golfUrl:"https://www.golfcampiglio.it",stats:["150km of pistes","Dolomites setting","Italian cuisine"]},
-  {name:"Kitzbühel",location:"Tyrol, Austria",region:"europe",resort:"Kitzbühel Ski Resort",resortUrl:"https://www.kitzbuehel.com",golf:"Golf Club Kitzbühel",golfUrl:"https://www.golfclub-kitzbuehel.at",stats:["170km of pistes","Hahnenkamm race","Medieval town"]},
-  {name:"St. Anton am Arlberg",location:"Tyrol, Austria",region:"europe",resort:"Arlberg Ski Resort",resortUrl:"https://www.stantonamarlberg.com",golf:"Golf Club St. Anton",golfUrl:"https://www.golfclub-stantonarlberg.at",stats:["305km of pistes","Birthplace of alpine skiing","Epic off-piste"]},
-  {name:"Innsbruck",location:"Tyrol, Austria",region:"europe",resort:"Nordkette / Axamer Lizum",resortUrl:"https://www.innsbruck.info/ski",golf:"Golf Club Innsbruck",golfUrl:"https://www.golfclub-innsbruck.at",stats:["Multiple ski areas","Olympic city","City + mountain"]},
-  {name:"Davos",location:"Graubünden, Switzerland",region:"europe",resort:"Davos Ski Resort",resortUrl:"https://www.davos.ch",golf:"Golf Club Davos",golfUrl:"https://www.golfclubdavos.ch",stats:["Largest resort in Switzerland","Klosters link","World Economic Forum"]},
-  {name:"Åre",location:"Jämtland, Sweden",region:"europe",resort:"Åre Ski Resort",resortUrl:"https://www.skistar.com/are",golf:"Åre Golf Club",golfUrl:"https://www.aregolfklubb.se",stats:["90 runs","Biggest in Scandinavia","Midnight sun golf"]},
-  {name:"Niseko",location:"Hokkaido, Japan",region:"japan",resort:"Niseko United",resortUrl:"https://www.niseko.ne.jp/en",golf:"Niseko Village Golf Course",golfUrl:"https://www.niseko-village.com/en/green/golf",stats:["Legendary JaPow","Mt. Yotei views","4 interconnected resorts"]},
-  {name:"Hakuba Valley",location:"Nagano, Japan",region:"japan",resort:"Hakuba Valley",resortUrl:"https://www.hakubavalley.com",golf:"Hakuba Golf Club",golfUrl:"https://www.hakuba-golf.com",stats:["10 resorts","1998 Olympics","Japanese Alps"]},
-  {name:"Nozawa Onsen",location:"Nagano, Japan",region:"japan",resort:"Nozawa Onsen Snow Resort",resortUrl:"https://www.nozawaski.com",golf:"Nozawa Onsen Golf Club",golfUrl:"https://www.nozawa-onsen.com",stats:["1,650m vertical","Free public onsen","Authentic village"]},
-  {name:"Myoko Kogen",location:"Niigata, Japan",region:"japan",resort:"Myoko Ski Resorts",resortUrl:"https://www.myoko.tv",golf:"Myoko Country Club",golfUrl:"https://www.myokogolf.com",stats:["7 resorts","Massive snowfall","Less crowded"]},
-  {name:"Furano",location:"Hokkaido, Japan",region:"japan",resort:"Furano Ski Resort",resortUrl:"https://www.ski-furano.jp",golf:"Furano Golf Course",golfUrl:"https://www.furanogolf.com",stats:["1,000m vertical","Quiet alternative","Summer lavender"]},
-  {name:"Rusutsu",location:"Hokkaido, Japan",region:"japan",resort:"Rusutsu Resort",resortUrl:"https://en.rusutsu.co.jp",golf:"Rusutsu Resort Golf",golfUrl:"https://en.rusutsu.co.jp/golf",stats:["42 courses","Powder destination","Family friendly"]},
-  {name:"Appi Kogen",location:"Iwate, Japan",region:"japan",resort:"Appi Kogen Resort",resortUrl:"https://www.appi.co.jp",golf:"Appi Kogen Golf Club",golfUrl:"https://www.appi.co.jp/golf",stats:["Powder destination","Golf on site","Tohoku region"]},
-  {name:"Queenstown",location:"Otago, New Zealand",region:"southern",resort:"The Remarkables",resortUrl:"https://www.theremarkables.co.nz",golf:"Millbrook Resort Golf",golfUrl:"https://www.millbrook.co.nz/golf",stats:["Lake views","Adventure capital","Jun–Oct season"]},
-  {name:"Wanaka",location:"Otago, New Zealand",region:"southern",resort:"Cardrona Alpine Resort",resortUrl:"https://www.cardrona.com",golf:"Wanaka Golf Club",golfUrl:"https://www.wanakagolfclub.co.nz",stats:["550 hectares","Family friendly","Stunning scenery"]},
-  {name:"Mt. Buller",location:"Victoria, Australia",region:"southern",resort:"Mt. Buller Ski Resort",resortUrl:"https://www.mtbuller.com.au",golf:"Mt. Buller Golf Course",golfUrl:"https://www.mtbuller.com.au/golf",stats:["180 runs","Closest major resort to Melbourne","Jun–Sep"]},
-  {name:"Falls Creek",location:"Victoria, Australia",region:"southern",resort:"Falls Creek Resort",resortUrl:"https://www.fallscreek.com.au",golf:"Falls Creek Golf",golfUrl:"https://www.fallscreek.com.au",stats:["450 hectares","Car-free village","Snowiest in Victoria"]},
-  {name:"Thredbo",location:"New South Wales, Australia",region:"southern",resort:"Thredbo Alpine Resort",resortUrl:"https://www.thredbo.com.au",golf:"Thredbo Golf Course",golfUrl:"https://www.thredbo.com.au/golf",stats:["Longest vertical in Australia","Year-round mountain biking","Alpine charm"]},
-  {name:"Valle Nevado",location:"Santiago, Chile",region:"southern",resort:"Valle Nevado Ski Resort",resortUrl:"https://www.vallenevado.com",golf:"Club de Golf Los Leones",golfUrl:"https://www.losleones.cl",stats:["7,000 hectares","Andean backdrop","Jun–Oct"]},
-  {name:"Portillo",location:"Valparaíso, Chile",region:"southern",resort:"Portillo Ski Resort",resortUrl:"https://www.skiportillo.com",golf:"Granadilla Country Club",golfUrl:"https://www.granadilla.cl",stats:["1 hotel only","Legendary ski history","Condor sightings"]},
-  {name:"Bariloche",location:"Río Negro, Argentina",region:"southern",resort:"Cerro Catedral",resortUrl:"https://www.catedralaltapatagonia.com",golf:"Llao Llao Golf Club",golfUrl:"https://www.llaollao.com/golf",stats:["1,000+ hectares","Patagonian scenery","Chocolate capital"]},
-  {name:"Stowe",location:"Vermont, USA",region:"east-usa",resort:"Stowe Mountain Resort",resortUrl:"https://www.stowe.com",golf:"Stowe Country Club",golfUrl:"https://www.stowecountryclub.com",stats:["485 acres","Highest peak in VT","Classic New England"]},
-  {name:"Killington",location:"Vermont, USA",region:"east-usa",resort:"Killington Resort",resortUrl:"https://www.killington.com",golf:"Green Mountain National Golf",golfUrl:"https://www.gmngolf.com",stats:["1,509 acres","Largest in East","Beast of the East"]},
-  {name:"Sugarbush",location:"Vermont, USA",region:"east-usa",resort:"Sugarbush Resort",resortUrl:"https://www.sugarbush.com",golf:"Sugarbush Golf Course",golfUrl:"https://www.sugarbush.com/golf",stats:["2 mountains","Mad River Valley","Farm-to-table scene"]},
-  {name:"Sunday River",location:"Maine, USA",region:"east-usa",resort:"Sunday River Resort",resortUrl:"https://www.sundayriver.com",golf:"Sunday River Golf Club",golfUrl:"https://www.sundayrivergolf.com",stats:["870 acres","8 peaks","Reliable snowmaking"]},
-  {name:"Sugarloaf",location:"Maine, USA",region:"east-usa",resort:"Sugarloaf Mountain",resortUrl:"https://www.sugarloaf.com",golf:"Sugarloaf Golf Club",golfUrl:"https://www.sugarloaf.com/golf",stats:["1,240 acres","Only lift-served glacier in East","Remote and wild"]},
-  {name:"Loon Mountain",location:"New Hampshire, USA",region:"east-usa",resort:"Loon Mountain Resort",resortUrl:"https://www.loonmtn.com",golf:"Jack O'Lantern Golf Resort",golfUrl:"https://www.jackolanterngolfresort.com",stats:["370 acres","Family friendly","White Mountains"]},
-  {name:"Bretton Woods",location:"New Hampshire, USA",region:"east-usa",resort:"Bretton Woods",resortUrl:"https://www.brettonwoods.com",golf:"Mount Washington Hotel Golf",golfUrl:"https://www.omnihotels.com/hotels/bretton-woods",stats:["464 acres","Omni Mount Washington","Historic grand hotel"]},
-  {name:"Hunter Mountain",location:"New York, USA",region:"east-usa",resort:"Hunter Mountain Resort",resortUrl:"https://www.huntermtn.com",golf:"Rip Van Winkle Country Club",golfUrl:"https://www.ripvanwinklecc.com",stats:["320 acres","Closest major resort to NYC","Catskills setting"]},
-  {name:"Whiteface Mountain",location:"New York, USA",region:"east-usa",resort:"Whiteface Mountain",resortUrl:"https://www.whiteface.com",golf:"Whiteface Club Golf Course",golfUrl:"https://www.whitefaceclub.com",stats:["322 acres","Olympic venue","Highest vertical in East"]},
-  {name:"Okemo Mountain",location:"Vermont, USA",region:"east-usa",resort:"Okemo Mountain Resort",resortUrl:"https://www.okemo.com",golf:"Okemo Valley Golf Club",golfUrl:"https://www.okemo.com/golf",stats:["667 acres","Best grooming in VT","Jackson Gore base"]},
-  {name:"Mad River Glen",location:"Vermont, USA",region:"east-usa",resort:"Mad River Glen",resortUrl:"https://www.madriverglen.com",golf:"Sugarbush Golf Course",golfUrl:"https://www.sugarbush.com/golf",stats:["115 trails","Skier-owned co-op","No snowboards"]},
-  {name:"Bansko",location:"Blagoevgrad, Bulgaria",region:"europe",resort:"Bansko Ski Resort",resortUrl:"https://www.banskoski.com",golf:"Pirin Golf Club",golfUrl:"https://www.piringolf.bg",stats:["75km of pistes","Most affordable in Alps","Pirin National Park"]},
-  {name:"Borovets",location:"Sofia, Bulgaria",region:"europe",resort:"Borovets Ski Resort",resortUrl:"https://www.borovets-bg.com",golf:"Rila Golf Club",golfUrl:"https://www.rilagolf.com",stats:["Oldest ski resort in Balkans","Budget friendly","Pine forest setting"]},
-  {name:"Poiana Brasov",location:"Brasov, Romania",region:"europe",resort:"Poiana Brasov Ski Resort",resortUrl:"https://www.poiana-brasov.com",golf:"Transylvania Golf Club",golfUrl:"https://www.transylvaniagolf.ro",stats:["Carpathian Mountains","Dracula's castle nearby","Budget destination"]},
-  {name:"Grandvalira",location:"Andorra",region:"europe",resort:"Grandvalira",resortUrl:"https://www.grandvalira.com",golf:"Golf Soldeu",golfUrl:"https://www.golfsoldeu.com",stats:["193km of pistes","Largest in Pyrenees","Tax-free shopping"]},
-  {name:"Baqueira Beret",location:"Catalonia, Spain",region:"europe",resort:"Baqueira Beret",resortUrl:"https://www.baqueira.es",golf:"Real Club de Golf el Prat",golfUrl:"https://www.realclubgolfelprat.com",stats:["2,043 hectares","Aran Valley","Spanish royals ski here"]},
-  {name:"Sierra Nevada",location:"Granada, Spain",region:"europe",resort:"Sierra Nevada Ski Resort",resortUrl:"https://www.sierranevada.es",golf:"Golf La Cañada",golfUrl:"https://www.golflacanada.es",stats:["107km of pistes","Southernmost ski in Europe","Near Alhambra"]},
-  {name:"Tromsø",location:"Troms, Norway",region:"europe",resort:"Tromsø Alpinpark",resortUrl:"https://www.tromsoalpinpark.no",golf:"Tromsø Golf Club",golfUrl:"https://www.tromsogk.no",stats:["Arctic skiing","Northern Lights","Midnight sun golf"]},
-  {name:"Geilo",location:"Numedal, Norway",region:"europe",resort:"Geilo Ski Resort",resortUrl:"https://www.geilo.no",golf:"Uvdal Golf Club",golfUrl:"https://www.uvdalgk.no",stats:["220km of trails","Norway's most popular ski town","Midnight sun"]},
-  {name:"Hemsedal",location:"Hallingdal, Norway",region:"europe",resort:"Hemsedal Ski Center",resortUrl:"https://www.hemsedal.com",golf:"Hemsedal Golf Club",golfUrl:"https://www.hemsedalsk.no",stats:["54km of pistes","Scandinavian Alps","Family friendly"]},
-  {name:"Levi",location:"Lapland, Finland",region:"europe",resort:"Levi Ski Resort",resortUrl:"https://www.levi.fi",golf:"Levi Golf Club",golfUrl:"https://www.levigolf.fi",stats:["43 slopes","Northern Lights","Lapland experience"]},
-  {name:"Rosa Khutor",location:"Sochi, Russia",region:"europe",resort:"Rosa Khutor Alpine Resort",resortUrl:"https://rosaski.com/en",golf:"Golf Club Sochi",golfUrl:"https://www.golfclub-sochi.ru",stats:["Sochi Olympics venue","Black Sea proximity","Growing destination"]},
-  {name:"Gudauri",location:"Mtskheta-Mtianeti, Georgia",region:"other",resort:"Gudauri Ski Resort",resortUrl:"https://www.gudauri.info",golf:"Tbilisi Golf Club",golfUrl:"https://www.tbilisigolf.ge",stats:["3,000m altitude","High Caucasus","Emerging destination"]},
-  {name:"Gulmarg",location:"Kashmir, India",region:"other",resort:"Gulmarg Ski Resort",resortUrl:"https://www.gulmarg.in",golf:"Gulmarg Golf Club",golfUrl:"https://www.gulmarg.in/golf",stats:["Highest gondola in world","Himalayan powder","Unique experience"]},
-  {name:"Yongpyong",location:"Gangwon, South Korea",region:"other",resort:"Yongpyong Resort",resortUrl:"https://www.yongpyong.co.kr",golf:"Yongpyong Golf Course",golfUrl:"https://www.yongpyong.co.kr/golf",stats:["2018 Olympics venue","31 slopes","K-drama filming location"]},
-  {name:"Muju",location:"North Jeolla, South Korea",region:"other",resort:"Muju Deogyusan Resort",resortUrl:"https://www.mujuresort.com",golf:"Muju Golf Club",golfUrl:"https://www.mujugolf.com",stats:["Deogyusan National Park","Scenic chairlifts","Korean culture"]},
-  {name:"Niseko Hanazono",location:"Hokkaido, Japan",region:"japan",resort:"Hanazono Resort",resortUrl:"https://www.hanazononiseko.com",golf:"Hanazono Golf",golfUrl:"https://www.hanazononiseko.com/en/golf",stats:["Quieter than main Niseko","Powder stashes","Park City connection"]},
-  {name:"Tomamu",location:"Hokkaido, Japan",region:"japan",resort:"Hoshino Tomamu Resort",resortUrl:"https://www.snowtomamu.jp",golf:"Tomamu Golf Course",golfUrl:"https://www.snowtomamu.jp/golf",stats:["Cloud sea phenomenon","Luxury resort","Ice village"]},
-  {name:"Shiga Kogen",location:"Nagano, Japan",region:"japan",resort:"Shiga Kogen",resortUrl:"https://www.shigakogen-ski.com",golf:"Shiga Kogen Golf Course",golfUrl:"https://www.shigakogen.gr.jp",stats:["21 resorts linked","1988 Olympics","Largest ski area in Japan"]},
-  {name:"Kiroro",location:"Hokkaido, Japan",region:"japan",resort:"Kiroro Snow World",resortUrl:"https://www.kiroro.co.jp",golf:"Kiroro Golf Course",golfUrl:"https://www.kiroro.co.jp/golf",stats:["Consistent powder","Less crowded than Niseko","Only 1 hour from Sapporo"]},
-  {name:"Keystone",location:"Colorado, USA",region:"rockies",resort:"Keystone Resort",resortUrl:"https://www.keystoneresort.com",golf:"Keystone Ranch Golf Course",golfUrl:"https://www.keystone.com/golf",stats:["3,148 acres","Night skiing","Family destination"]},
-  {name:"Copper Mountain",location:"Colorado, USA",region:"rockies",resort:"Copper Mountain Resort",resortUrl:"https://www.coppercolorado.com",golf:"Copper Creek Golf Club",golfUrl:"https://www.coppercreekgolf.com",stats:["2,465 acres","Natural terrain separation","Good value"]},
-  {name:"Winter Park",location:"Colorado, USA",region:"rockies",resort:"Winter Park Resort",resortUrl:"https://www.winterparkresort.com",golf:"Pole Creek Golf Club",golfUrl:"https://www.polecreekgolf.com",stats:["3,081 acres","Denver's mountain","Great terrain variety"]},
-  {name:"Loveland",location:"Colorado, USA",region:"rockies",resort:"Loveland Ski Area",resortUrl:"https://www.skiloveland.com",golf:"Loveland Valley Golf Club",golfUrl:"https://www.lovelandvalleygolf.com",stats:["1,800 acres","Best value in CO","Above treeline terrain"]},
-  {name:"Arapahoe Basin",location:"Colorado, USA",region:"rockies",resort:"Arapahoe Basin",resortUrl:"https://www.arapahoebasin.com",golf:"Keystone Ranch Golf Course",golfUrl:"https://www.keystone.com/golf",stats:["1,428 acres","Longest CO season","Above treeline"]},
-  {name:"Snowshoe Mountain",location:"West Virginia, USA",region:"east-usa",resort:"Snowshoe Mountain Resort",resortUrl:"https://www.snowshoemtn.com",golf:"Snowshoe Mountain Golf",golfUrl:"https://www.snowshoemtn.com/golf",stats:["257 acres","Highest point in WV","Appalachian charm"]},
-  {name:"Blue Mountain",location:"Ontario, Canada",region:"canada",resort:"Blue Mountain Resort",resortUrl:"https://www.bluemountain.ca",golf:"Monterra Golf",golfUrl:"https://www.monterragolf.com",stats:["365 acres","Ontario's largest","Georgian Bay views"]},
-  {name:"Tremblant",location:"Quebec, Canada",region:"canada",resort:"Mont-Tremblant",resortUrl:"https://www.tremblant.ca",golf:"Golf Tremblant",golfUrl:"https://www.golftremblant.com",stats:["755 acres","Quebec's best","Pedestrian village"]},
-  {name:"Whistler Creekside",location:"British Columbia, Canada",region:"canada",resort:"Whistler Creekside",resortUrl:"https://www.whistlerblackcomb.com",golf:"Whistler Golf Club",golfUrl:"https://www.whistlergolf.com",stats:["Same mountain access","Quieter base","Arnold Palmer design"]},
-  {name:"Silver Star",location:"British Columbia, Canada",region:"canada",resort:"Silver Star Mountain Resort",resortUrl:"https://www.skisilverstar.com",golf:"Predator Ridge Golf Resort",golfUrl:"https://www.predatorridge.com",stats:["3,282 acres","Victorian village","Okanagan wine region"]},
-  {name:"Big White",location:"British Columbia, Canada",region:"canada",resort:"Big White Ski Resort",resortUrl:"https://www.bigwhite.com",golf:"Kelowna Golf & Country Club",golfUrl:"https://www.kelownagolf.ca",stats:["2,765 acres","Snow ghosts","Okanagan Valley"]},
-  {name:"Red Mountain",location:"British Columbia, Canada",region:"canada",resort:"Red Mountain Resort",resortUrl:"https://www.redresort.com",golf:"Rossland Golf Club",golfUrl:"https://www.rosslandgolf.com",stats:["4,200 acres","Undiscovered gem","Steep and deep"]},
-  {name:"Panorama",location:"British Columbia, Canada",region:"canada",resort:"Panorama Mountain Resort",resortUrl:"https://www.panoramaresort.com",golf:"Greywolf Golf Course",golfUrl:"https://www.greywolfgolf.com",stats:["2,975 acres","4,000 ft vertical","Columbia Valley"]},
+var D=[
+{n:"Whistler Blackcomb",l:"British Columbia, Canada",r:"canada",ri:"BC",c1:"Whistler Blackcomb",u1:"https://www.whistlerblackcomb.com",c2:"Nicklaus North Golf",u2:"https://www.nicklasnorth.com",t:"8,171 acres|200+ trails|469in snowfall"},
+{n:"Lake Tahoe",l:"California/Nevada, USA",r:"west-usa",ri:"CA/NV",c1:"Palisades Tahoe",u1:"https://www.palisadestahoe.com",c2:"Edgewood Tahoe",u2:"https://www.edgewoodtahoe.com",t:"6,000+ acres|Year-round|Lakeside golf"},
+{n:"Park City",l:"Utah, USA",r:"rockies",ri:"UT",c1:"Park City Mountain",u1:"https://www.parkcitymountain.com",c2:"Park City Golf Club",u2:"https://www.parkcity.org/departments/golf-course",t:"7,300+ acres|348 trails|Historic town"},
+{n:"Aspen Snowmass",l:"Colorado, USA",r:"rockies",ri:"CO",c1:"Aspen Snowmass",u1:"https://www.aspensnowmass.com",c2:"Aspen Golf Club",u2:"https://www.aspengolfclub.com",t:"5,527 acres|4 mountains|Luxury"},
+{n:"Vail",l:"Colorado, USA",r:"rockies",ri:"CO",c1:"Vail Mountain",u1:"https://www.vail.com",c2:"Vail Golf Club",u2:"https://www.vailgolfclub.com",t:"5,317 acres|Back bowls|European village"},
+{n:"Breckenridge",l:"Colorado, USA",r:"rockies",ri:"CO",c1:"Breckenridge Ski Resort",u1:"https://www.breckenridge.com",c2:"Breckenridge Golf Club",u2:"https://www.breckenridgegolfclub.com",t:"2,908 acres|5 peaks|Highest golf in NA"},
+{n:"Jackson Hole",l:"Wyoming, USA",r:"rockies",ri:"WY",c1:"Jackson Hole Mountain",u1:"https://www.jacksonhole.com",c2:"JH Golf and Tennis",u2:"https://www.jhgtc.com",t:"2,500 acres|4,139ft vertical|Expert terrain"},
+{n:"Mammoth Mountain",l:"California, USA",r:"west-usa",ri:"CA",c1:"Mammoth Mountain",u1:"https://www.mammothmountain.com",c2:"Sierra Star Golf",u2:"https://www.sierrastargolf.com",t:"3,500 acres|Longest CA season|400in snowfall"},
+{n:"Big Sky",l:"Montana, USA",r:"rockies",ri:"MT",c1:"Big Sky Resort",u1:"https://www.bigskyresort.com",c2:"Big Sky Golf Course",u2:"https://www.bigskyresort.com/golf",t:"5,850 acres|Lone Peak|No crowds"},
+{n:"Steamboat Springs",l:"Colorado, USA",r:"rockies",ri:"CO",c1:"Steamboat Ski Resort",u1:"https://www.steamboat.com",c2:"Rollingstone Ranch Golf",u2:"https://www.rollingstoneranch.com",t:"2,965 acres|Champagne powder|Western charm"},
+{n:"Telluride",l:"Colorado, USA",r:"rockies",ri:"CO",c1:"Telluride Ski Resort",u1:"https://www.telluride.com",c2:"Telluride Golf Club",u2:"https://www.telluride.com/golf",t:"2,000 acres|Box canyon|Most beautiful in CO"},
+{n:"Snowbird",l:"Utah, USA",r:"rockies",ri:"UT",c1:"Snowbird",u1:"https://www.snowbird.com",c2:"Willow Creek Country Club",u2:"https://www.willowcreekcc.com",t:"2,500 acres|500in snowfall|Expert terrain"},
+{n:"Alta",l:"Utah, USA",r:"rockies",ri:"UT",c1:"Alta Ski Area",u1:"https://www.alta.com",c2:"Mountain Dell Golf",u2:"https://www.slco.org/mountain-dell",t:"2,614 acres|Skiers only|Legendary powder"},
+{n:"Deer Valley",l:"Utah, USA",r:"rockies",ri:"UT",c1:"Deer Valley Resort",u1:"https://www.deervalley.com",c2:"Deer Valley Club",u2:"https://www.deervalleyclub.com",t:"2,026 acres|Ski-in/ski-out|Ultra-luxury"},
+{n:"Crested Butte",l:"Colorado, USA",r:"rockies",ri:"CO",c1:"Crested Butte Mountain",u1:"https://www.skicb.com",c2:"Club at Crested Butte",u2:"https://www.cbclub.com",t:"1,547 acres|Extreme terrain|Unspoiled town"},
+{n:"Sun Valley",l:"Idaho, USA",r:"rockies",ri:"ID",c1:"Sun Valley Resort",u1:"https://www.sunvalley.com",c2:"Sun Valley Golf Course",u2:"https://www.sunvalley.com/golf",t:"2,054 acres|First chairlift|Celebrity hideout"},
+{n:"Mt. Bachelor",l:"Oregon, USA",r:"west-usa",ri:"OR",c1:"Mt. Bachelor",u1:"https://www.mtbachelor.com",c2:"Widgi Creek Golf Club",u2:"https://www.widgicreek.com",t:"4,318 acres|Volcanic terrain|Long season"},
+{n:"Crystal Mountain",l:"Washington, USA",r:"west-usa",ri:"WA",c1:"Crystal Mountain",u1:"https://www.crystalmountainresort.com",c2:"Washington National Golf",u2:"https://www.washingtonnational.com",t:"2,600 acres|Highest lift in WA|Rainier views"},
+{n:"Taos Ski Valley",l:"New Mexico, USA",r:"rockies",ri:"NM",c1:"Taos Ski Valley",u1:"https://www.skitaos.com",c2:"Taos Country Club",u2:"https://www.taoscountryclub.com",t:"1,294 acres|51% expert|Unique culture"},
+{n:"Banff and Lake Louise",l:"Alberta, Canada",r:"canada",ri:"AB",c1:"Lake Louise Ski Resort",u1:"https://www.skilouise.com",c2:"Banff Springs Golf",u2:"https://www.fairmont.com/banff-springs/golf",t:"4,200 acres|UNESCO Heritage|Wildlife viewing"},
+{n:"Revelstoke",l:"British Columbia, Canada",r:"canada",ri:"BC",c1:"Revelstoke Mountain",u1:"https://www.revelstokemountainresort.com",c2:"Revelstoke Golf Club",u2:"https://www.revelstokegolfclub.com",t:"3,121 acres|Greatest vertical in NA|Cat skiing"},
+{n:"Sun Peaks",l:"British Columbia, Canada",r:"canada",ri:"BC",c1:"Sun Peaks Resort",u1:"https://www.sunpeaksresort.com",c2:"Sun Peaks Golf",u2:"https://www.sunpeaksresort.com/golf",t:"4,270 acres|2nd largest in BC|Car-free village"},
+{n:"Fernie Alpine Resort",l:"British Columbia, Canada",r:"canada",ri:"BC",c1:"Fernie Alpine Resort",u1:"https://www.skifernie.com",c2:"Fernie Golf Club",u2:"https://www.ferniegolfclub.com",t:"2,504 acres|Bowl skiing|Powder destination"},
+{n:"Kicking Horse",l:"British Columbia, Canada",r:"canada",ri:"BC",c1:"Kicking Horse Mountain",u1:"https://www.kickinghorseresort.com",c2:"Golden Golf Club",u2:"https://www.goldengolfclub.com",t:"2,825 acres|4,133ft vertical|World-class terrain"},
+{n:"Tremblant",l:"Quebec, Canada",r:"canada",ri:"QC",c1:"Mont-Tremblant",u1:"https://www.tremblant.ca",c2:"Golf Tremblant",u2:"https://www.golftremblant.com",t:"755 acres|Quebec best|Pedestrian village"},
+{n:"Blue Mountain",l:"Ontario, Canada",r:"canada",ri:"ON",c1:"Blue Mountain Resort",u1:"https://www.bluemountain.ca",c2:"Monterra Golf",u2:"https://www.monterragolf.com",t:"365 acres|Ontario largest|Georgian Bay views"},
+{n:"Silver Star",l:"British Columbia, Canada",r:"canada",ri:"BC",c1:"Silver Star Mountain",u1:"https://www.skisilverstar.com",c2:"Predator Ridge Golf",u2:"https://www.predatorridge.com",t:"3,282 acres|Victorian village|Okanagan wine"},
+{n:"Big White",l:"British Columbia, Canada",r:"canada",ri:"BC",c1:"Big White Ski Resort",u1:"https://www.bigwhite.com",c2:"Kelowna Golf Club",u2:"https://www.kelownagolf.ca",t:"2,765 acres|Snow ghosts|Okanagan Valley"},
+{n:"Red Mountain",l:"British Columbia, Canada",r:"canada",ri:"BC",c1:"Red Mountain Resort",u1:"https://www.redresort.com",c2:"Rossland Golf Club",u2:"https://www.rosslandgolf.com",t:"4,200 acres|Undiscovered gem|Steep and deep"},
+{n:"Zermatt",l:"Valais, Switzerland",r:"europe",ri:"CH",c1:"Zermatt Ski Resort",u1:"https://www.zermatt.ch",c2:"Matterhorn Golf Club",u2:"https://www.matterhornclub.ch",t:"360km of pistes|Matterhorn views|Year-round skiing"},
+{n:"Chamonix",l:"Haute-Savoie, France",r:"europe",ri:"FR",c1:"Chamonix Mont-Blanc",u1:"https://www.chamonix.com",c2:"Golf Club Chamonix",u2:"https://www.golf-chamonix.com",t:"150km of pistes|Mont Blanc|Off-piste paradise"},
+{n:"St. Moritz",l:"Graubunden, Switzerland",r:"europe",ri:"CH",c1:"St. Moritz Ski Resort",u1:"https://www.stmoritz.com",c2:"Engadin Golf Club",u2:"https://www.engadin-golf.ch",t:"350km of pistes|Swiss luxury|Glamorous scene"},
+{n:"Verbier",l:"Valais, Switzerland",r:"europe",ri:"CH",c1:"Verbier 4 Vallees",u1:"https://www.verbier.ch",c2:"Golf Club de Verbier",u2:"https://www.golfclubverbier.ch",t:"410km of pistes|Expert terrain|Legendary apres"},
+{n:"Courchevel",l:"Savoie, France",r:"europe",ri:"FR",c1:"Courchevel",u1:"https://www.courchevel.com",c2:"Golf Club Courchevel",u2:"https://www.golfcourchevel.com",t:"600km Les Trois Vallees|Ultra-luxury|Best grooming"},
+{n:"Meribel",l:"Savoie, France",r:"europe",ri:"FR",c1:"Meribel Ski Resort",u1:"https://www.meribel.net",c2:"Golf Club Meribel",u2:"https://www.golf-meribel.com",t:"600km linked|Central location|British favourite"},
+{n:"Val d'Isere",l:"Savoie, France",r:"europe",ri:"FR",c1:"Val d'Isere Tignes",u1:"https://www.valdisere.com",c2:"Golf Club de Tignes",u2:"https://www.golftgv.com",t:"300km of pistes|World Cup venue|Reliable snow"},
+{n:"Cortina d'Ampezzo",l:"Veneto, Italy",r:"europe",ri:"IT",c1:"Cortina Ski Area",u1:"https://www.dolomiti.org",c2:"Golf Club Cortina",u2:"https://www.golfcortina.it",t:"Dolomiti Superski|Pink Dolomites|Italian style"},
+{n:"Kitzbuhel",l:"Tyrol, Austria",r:"europe",ri:"AT",c1:"Kitzbuehel Ski Resort",u1:"https://www.kitzbuehel.com",c2:"Golf Club Kitzbuehel",u2:"https://www.golfclub-kitzbuehel.at",t:"170km of pistes|Hahnenkamm race|Medieval town"},
+{n:"St. Anton",l:"Tyrol, Austria",r:"europe",ri:"AT",c1:"Arlberg Ski Resort",u1:"https://www.stantonamarlberg.com",c2:"Golf Club St. Anton",u2:"https://www.golfclub-stantonarlberg.at",t:"305km of pistes|Birthplace of skiing|Epic off-piste"},
+{n:"Davos",l:"Graubunden, Switzerland",r:"europe",ri:"CH",c1:"Davos Ski Resort",u1:"https://www.davos.ch",c2:"Golf Club Davos",u2:"https://www.golfclubdavos.ch",t:"Largest in Switzerland|Klosters link|WEF host"},
+{n:"Are",l:"Jamtland, Sweden",r:"europe",ri:"SE",c1:"Are Ski Resort",u1:"https://www.skistar.com/are",c2:"Are Golf Club",u2:"https://www.aregolfklubb.se",t:"90 runs|Biggest in Scandinavia|Midnight sun golf"},
+{n:"Bansko",l:"Blagoevgrad, Bulgaria",r:"europe",ri:"BG",c1:"Bansko Ski Resort",u1:"https://www.banskoski.com",c2:"Pirin Golf Club",u2:"https://www.piringolf.bg",t:"75km of pistes|Most affordable|Pirin National Park"},
+{n:"Grandvalira",l:"Andorra",r:"europe",ri:"AD",c1:"Grandvalira",u1:"https://www.grandvalira.com",c2:"Golf Soldeu",u2:"https://www.golfsoldeu.com",t:"193km of pistes|Largest in Pyrenees|Tax-free shopping"},
+{n:"Baqueira Beret",l:"Catalonia, Spain",r:"europe",ri:"ES",c1:"Baqueira Beret",u1:"https://www.baqueira.es",c2:"Real Club Golf El Prat",u2:"https://www.realclubgolfelprat.com",t:"2,043 hectares|Aran Valley|Spanish royals ski here"},
+{n:"Sierra Nevada",l:"Granada, Spain",r:"europe",ri:"ES",c1:"Sierra Nevada Resort",u1:"https://www.sierranevada.es",c2:"Golf La Canada",u2:"https://www.golflacanada.es",t:"107km of pistes|Southernmost ski in Europe|Near Alhambra"},
+{n:"Niseko",l:"Hokkaido, Japan",r:"japan",ri:"JP",c1:"Niseko United",u1:"https://www.niseko.ne.jp/en",c2:"Niseko Village Golf",u2:"https://www.niseko-village.com/en/green/golf",t:"Legendary JaPow|Mt. Yotei views|4 resorts linked"},
+{n:"Hakuba Valley",l:"Nagano, Japan",r:"japan",ri:"JP",c1:"Hakuba Valley",u1:"https://www.hakubavalley.com",c2:"Hakuba Golf Club",u2:"https://www.hakuba-golf.com",t:"10 resorts|1998 Olympics|Japanese Alps"},
+{n:"Nozawa Onsen",l:"Nagano, Japan",r:"japan",ri:"JP",c1:"Nozawa Onsen Resort",u1:"https://www.nozawaski.com",c2:"Nozawa Onsen Golf",u2:"https://www.nozawa-onsen.com",t:"1,650m vertical|Free public onsen|Authentic village"},
+{n:"Myoko Kogen",l:"Niigata, Japan",r:"japan",ri:"JP",c1:"Myoko Ski Resorts",u1:"https://www.myoko.tv",c2:"Myoko Country Club",u2:"https://www.myokogolf.com",t:"7 resorts|Massive snowfall|Less crowded"},
+{n:"Furano",l:"Hokkaido, Japan",r:"japan",ri:"JP",c1:"Furano Ski Resort",u1:"https://www.ski-furano.jp",c2:"Furano Golf Course",u2:"https://www.furanogolf.com",t:"1,000m vertical|Quiet alternative|Summer lavender"},
+{n:"Rusutsu",l:"Hokkaido, Japan",r:"japan",ri:"JP",c1:"Rusutsu Resort",u1:"https://en.rusutsu.co.jp",c2:"Rusutsu Resort Golf",u2:"https://en.rusutsu.co.jp/golf",t:"42 courses|Powder destination|Family friendly"},
+{n:"Shiga Kogen",l:"Nagano, Japan",r:"japan",ri:"JP",c1:"Shiga Kogen",u1:"https://www.shigakogen-ski.com",c2:"Shiga Kogen Golf",u2:"https://www.shigakogen.gr.jp",t:"21 resorts linked|1988 Olympics|Largest ski area in Japan"},
+{n:"Kiroro",l:"Hokkaido, Japan",r:"japan",ri:"JP",c1:"Kiroro Snow World",u1:"https://www.kiroro.co.jp",c2:"Kiroro Golf Course",u2:"https://www.kiroro.co.jp/golf",t:"Consistent powder|Less crowded|1hr from Sapporo"},
+{n:"Tomamu",l:"Hokkaido, Japan",r:"japan",ri:"JP",c1:"Hoshino Tomamu Resort",u1:"https://www.snowtomamu.jp",c2:"Tomamu Golf Course",u2:"https://www.snowtomamu.jp/golf",t:"Cloud sea phenomenon|Luxury resort|Ice village"},
+{n:"Queenstown",l:"Otago, New Zealand",r:"southern",ri:"NZ",c1:"The Remarkables",u1:"https://www.theremarkables.co.nz",c2:"Millbrook Resort Golf",u2:"https://www.millbrook.co.nz/golf",t:"Lake views|Adventure capital|Jun-Oct season"},
+{n:"Wanaka",l:"Otago, New Zealand",r:"southern",ri:"NZ",c1:"Cardrona Alpine Resort",u1:"https://www.cardrona.com",c2:"Wanaka Golf Club",u2:"https://www.wanakagolfclub.co.nz",t:"550 hectares|Family friendly|Stunning scenery"},
+{n:"Mt. Buller",l:"Victoria, Australia",r:"southern",ri:"AU",c1:"Mt. Buller Ski Resort",u1:"https://www.mtbuller.com.au",c2:"Mt. Buller Golf",u2:"https://www.mtbuller.com.au/golf",t:"180 runs|Close to Melbourne|Jun-Sep"},
+{n:"Thredbo",l:"New South Wales, Australia",r:"southern",ri:"AU",c1:"Thredbo Alpine Resort",u1:"https://www.thredbo.com.au",c2:"Thredbo Golf Course",u2:"https://www.thredbo.com.au/golf",t:"Longest vertical in AU|Year-round biking|Alpine charm"},
+{n:"Valle Nevado",l:"Santiago, Chile",r:"southern",ri:"CL",c1:"Valle Nevado",u1:"https://www.vallenevado.com",c2:"Club de Golf Los Leones",u2:"https://www.losleones.cl",t:"7,000 hectares|Andean backdrop|Jun-Oct"},
+{n:"Portillo",l:"Valparaiso, Chile",r:"southern",ri:"CL",c1:"Portillo Ski Resort",u1:"https://www.skiportillo.com",c2:"Granadilla Country Club",u2:"https://www.granadilla.cl",t:"1 hotel only|Legendary ski history|Condor sightings"},
+{n:"Bariloche",l:"Rio Negro, Argentina",r:"southern",ri:"AR",c1:"Cerro Catedral",u1:"https://www.catedralaltapatagonia.com",c2:"Llao Llao Golf Club",u2:"https://www.llaollao.com/golf",t:"1,000+ hectares|Patagonian scenery|Chocolate capital"},
+{n:"Stowe",l:"Vermont, USA",r:"east-usa",ri:"VT",c1:"Stowe Mountain Resort",u1:"https://www.stowe.com",c2:"Stowe Country Club",u2:"https://www.stowecountryclub.com",t:"485 acres|Highest peak in VT|Classic New England"},
+{n:"Killington",l:"Vermont, USA",r:"east-usa",ri:"VT",c1:"Killington Resort",u1:"https://www.killington.com",c2:"Green Mountain National Golf",u2:"https://www.gmngolf.com",t:"1,509 acres|Largest in East|Beast of the East"},
+{n:"Sugarbush",l:"Vermont, USA",r:"east-usa",ri:"VT",c1:"Sugarbush Resort",u1:"https://www.sugarbush.com",c2:"Sugarbush Golf Course",u2:"https://www.sugarbush.com/golf",t:"2 mountains|Mad River Valley|Farm-to-table scene"},
+{n:"Sunday River",l:"Maine, USA",r:"east-usa",ri:"ME",c1:"Sunday River Resort",u1:"https://www.sundayriver.com",c2:"Sunday River Golf Club",u2:"https://www.sundayrivergolf.com",t:"870 acres|8 peaks|Reliable snowmaking"},
+{n:"Sugarloaf",l:"Maine, USA",r:"east-usa",ri:"ME",c1:"Sugarloaf Mountain",u1:"https://www.sugarloaf.com",c2:"Sugarloaf Golf Club",u2:"https://www.sugarloaf.com/golf",t:"1,240 acres|Only glacier in East|Remote and wild"},
+{n:"Whiteface Mountain",l:"New York, USA",r:"east-usa",ri:"NY",c1:"Whiteface Mountain",u1:"https://www.whiteface.com",c2:"Whiteface Club Golf",u2:"https://www.whitefaceclub.com",t:"322 acres|Olympic venue|Highest vertical in East"},
+{n:"Bretton Woods",l:"New Hampshire, USA",r:"east-usa",ri:"NH",c1:"Bretton Woods",u1:"https://www.brettonwoods.com",c2:"Mt. Washington Hotel Golf",u2:"https://www.omnihotels.com/hotels/bretton-woods",t:"464 acres|Historic grand hotel|White Mountains"},
+{n:"Okemo Mountain",l:"Vermont, USA",r:"east-usa",ri:"VT",c1:"Okemo Mountain Resort",u1:"https://www.okemo.com",c2:"Okemo Valley Golf Club",u2:"https://www.okemo.com/golf",t:"667 acres|Best grooming in VT|Jackson Gore base"},
+{n:"Hunter Mountain",l:"New York, USA",r:"east-usa",ri:"NY",c1:"Hunter Mountain Resort",u1:"https://www.huntermtn.com",c2:"Rip Van Winkle CC",u2:"https://www.ripvanwinklecc.com",t:"320 acres|Closest to NYC|Catskills setting"},
+{n:"Keystone",l:"Colorado, USA",r:"rockies",ri:"CO",c1:"Keystone Resort",u1:"https://www.keystoneresort.com",c2:"Keystone Ranch Golf",u2:"https://www.keystone.com/golf",t:"3,148 acres|Night skiing|Family destination"},
+{n:"Copper Mountain",l:"Colorado, USA",r:"rockies",ri:"CO",c1:"Copper Mountain Resort",u1:"https://www.coppercolorado.com",c2:"Copper Creek Golf Club",u2:"https://www.coppercreekgolf.com",t:"2,465 acres|Natural terrain|Good value"},
+{n:"Winter Park",l:"Colorado, USA",r:"rockies",ri:"CO",c1:"Winter Park Resort",u1:"https://www.winterparkresort.com",c2:"Pole Creek Golf Club",u2:"https://www.polecreekgolf.com",t:"3,081 acres|Denver's mountain|Great variety"},
+{n:"Niseko Hanazono",l:"Hokkaido, Japan",r:"japan",ri:"JP",c1:"Hanazono Resort",u1:"https://www.hanazononiseko.com",c2:"Hanazono Golf",u2:"https://www.hanazononiseko.com/en/golf",t:"Quieter than main Niseko|Powder stashes|Luxury lodging"},
+{n:"Gudauri",l:"Georgia",r:"other",ri:"GE",c1:"Gudauri Ski Resort",u1:"https://www.gudauri.info",c2:"Tbilisi Golf Club",u2:"https://www.tbilisigolf.ge",t:"3,000m altitude|High Caucasus|Emerging destination"},
+{n:"Gulmarg",l:"Kashmir, India",r:"other",ri:"IN",c1:"Gulmarg Ski Resort",u1:"https://www.gulmarg.in",c2:"Gulmarg Golf Club",u2:"https://www.gulmarg.in/golf",t:"Highest gondola in world|Himalayan powder|Unique experience"},
+{n:"Yongpyong",l:"Gangwon, South Korea",r:"other",ri:"KR",c1:"Yongpyong Resort",u1:"https://www.yongpyong.co.kr",c2:"Yongpyong Golf Course",u2:"https://www.yongpyong.co.kr/golf",t:"2018 Olympics venue|31 slopes|K-drama filming"},
+{n:"Panorama",l:"British Columbia, Canada",r:"canada",ri:"BC",c1:"Panorama Mountain Resort",u1:"https://www.panoramaresort.com",c2:"Greywolf Golf Course",u2:"https://www.greywolfgolf.com",t:"2,975 acres|4,000ft vertical|Columbia Valley"},
+{n:"Arapahoe Basin",l:"Colorado, USA",r:"rockies",ri:"CO",c1:"Arapahoe Basin",u1:"https://www.arapahoebasin.com",c2:"Keystone Ranch Golf",u2:"https://www.keystone.com/golf",t:"1,428 acres|Longest CO season|Above treeline"},
+{n:"Madonna di Campiglio",l:"Trentino, Italy",r:"europe",ri:"IT",c1:"Ski Area Campiglio",u1:"https://www.campiglio.it",c2:"Golf Club Campiglio",u2:"https://www.golfcampiglio.it",t:"150km of pistes|Dolomites setting|Italian cuisine"},
+{n:"Innsbruck",l:"Tyrol, Austria",r:"europe",ri:"AT",c1:"Nordkette and Axamer Lizum",u1:"https://www.innsbruck.info/ski",c2:"Golf Club Innsbruck",u2:"https://www.golfclub-innsbruck.at",t:"Multiple ski areas|Olympic city|City and mountain"},
+{n:"Geilo",l:"Numedal, Norway",r:"europe",ri:"NO",c1:"Geilo Ski Resort",u1:"https://www.geilo.no",c2:"Uvdal Golf Club",u2:"https://www.uvdalgk.no",t:"220km of trails|Popular Norwegian town|Midnight sun"},
+{n:"Levi",l:"Lapland, Finland",r:"europe",ri:"FI",c1:"Levi Ski Resort",u1:"https://www.levi.fi",c2:"Levi Golf Club",u2:"https://www.levigolf.fi",t:"43 slopes|Northern Lights|Lapland experience"},
+{n:"Falls Creek",l:"Victoria, Australia",r:"southern",ri:"AU",c1:"Falls Creek Resort",u1:"https://www.fallscreek.com.au",c2:"Falls Creek Golf",u2:"https://www.fallscreek.com.au",t:"450 hectares|Car-free village|Snowiest in Victoria"}
 ];
 
-function buildCard(d) {
-  const colors = ['#1a3d2b','#0a1628','#1a2840','#2d4a1e','#1a3d3d','#2b1a3d','#3d2b1a','#1a1a3d'];
-  const bg = colors[Math.abs(d.name.charCodeAt(0) + d.name.charCodeAt(1)) % colors.length];
-  return `<div class="dest-full-card" data-region="${d.region}" data-name="${d.name.toLowerCase()}" data-location="${d.location.toLowerCase()}">
-    <div class="dest-full-card-img" style="background:linear-gradient(135deg,${bg},#0a0a0a)">
-      <span class="dest-full-card-region">${d.location.split(',').slice(-1)[0].trim()}</span>
-    </div>
-    <div class="dest-full-card-body">
-      <h3>${d.name}</h3>
-      <p class="location">${d.location}</p>
-      <div class="dest-links">
-        <div class="dest-link-box"><div class="label">Ski Resort</div><a href="${d.resortUrl}" target="_blank" rel="nofollow">${d.resort} ↗</a></div>
-        <div class="dest-link-box"><div class="label">Golf Course</div><a href="${d.golfUrl}" target="_blank" rel="nofollow">${d.golf} ↗</a></div>
-      </div>
-      <div class="dest-stats">${d.stats.map(s=>`<span class="dest-stat-tag">${s}</span>`).join('')}</div>
-    </div>
-  </div>`;
+var colors=["#1a3d2b","#0a1628","#1a2840","#2d4a1e","#1a3d3d","#2b1a3d","#3d2b1a","#1a1a3d","#0d2518","#2a3d1a"];
+var grid=document.getElementById("destGrid");
+var countEl=document.getElementById("destCount");
+var noResults=document.getElementById("noResults");
+var searchInput=document.getElementById("searchInput");
+var filterBtns=document.querySelectorAll(".filter-btn");
+var currentFilter="all";
+
+function buildCard(d,i){
+  var bg=colors[i%colors.length];
+  var tags=d.t.split("|").map(function(t){return '<span class="d-tag">'+t+'</span>';}).join("");
+  var html='<div class="dest-full-card d-card" data-region="'+d.r+'" data-name="'+d.n.toLowerCase()+'" data-location="'+d.l.toLowerCase()+'">';
+  html+='<div class="d-img" style="background:linear-gradient(135deg,'+bg+',#0a0a0a)">';
+  html+='<span class="d-region">'+d.ri+'</span></div>';
+  html+='<div class="d-body">';
+  html+='<p class="d-name">'+d.n+'</p>';
+  html+='<p class="d-loc">'+d.l+'</p>';
+  html+='<div class="d-links">';
+  html+='<div class="d-link"><div class="d-label">Ski Resort</div><a href="'+d.u1+'" target="_blank" rel="nofollow">'+d.c1+' &#8599;</a></div>';
+  html+='<div class="d-link"><div class="d-label">Golf Course</div><a href="'+d.u2+'" target="_blank" rel="nofollow">'+d.c2+' &#8599;</a></div>';
+  html+='</div>';
+  html+='<div class="d-tags">'+tags+'</div>';
+  html+='</div></div>';
+  return html;
 }
 
-const grid = document.getElementById('destGrid');
-const countEl = document.getElementById('destCount');
-const noResults = document.getElementById('noResults');
-const searchInput = document.getElementById('searchInput');
-const filterBtns = document.querySelectorAll('.filter-btn');
-
-let currentFilter = 'all';
-
-function render() {
-  const query = searchInput.value.toLowerCase().trim();
-  const filtered = destinations.filter(d => {
-    const matchRegion = currentFilter === 'all' || d.region === currentFilter;
-    const matchSearch = !query || d.name.toLowerCase().includes(query) || d.location.toLowerCase().includes(query) || d.resort.toLowerCase().includes(query) || d.golf.toLowerCase().includes(query);
-    return matchRegion && matchSearch;
+function render(){
+  var q=searchInput.value.toLowerCase().trim();
+  var filtered=D.filter(function(d){
+    var matchR=currentFilter==="all"||d.r===currentFilter;
+    var matchS=!q||d.n.toLowerCase().indexOf(q)>-1||d.l.toLowerCase().indexOf(q)>-1||d.c1.toLowerCase().indexOf(q)>-1||d.c2.toLowerCase().indexOf(q)>-1;
+    return matchR&&matchS;
   });
-  grid.innerHTML = filtered.map(buildCard).join('');
-  countEl.innerHTML = `<strong>${filtered.length}</strong> destination${filtered.length !== 1 ? 's' : ''}`;
-  noResults.style.display = filtered.length === 0 ? 'block' : 'none';
+  grid.innerHTML=filtered.map(function(d,i){return buildCard(d,i);}).join("");
+  countEl.innerHTML="<strong>"+filtered.length+"</strong> destination"+(filtered.length!==1?"s":"");
+  noResults.style.display=filtered.length===0?"block":"none";
 }
 
-searchInput.addEventListener('input', render);
-
-filterBtns.forEach(btn => {
-  btn.addEventListener('click', () => {
-    filterBtns.forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    currentFilter = btn.dataset.filter;
+searchInput.addEventListener("input",render);
+filterBtns.forEach(function(btn){
+  btn.addEventListener("click",function(){
+    filterBtns.forEach(function(b){b.classList.remove("active");});
+    btn.classList.add("active");
+    currentFilter=btn.getAttribute("data-filter");
     render();
   });
 });
